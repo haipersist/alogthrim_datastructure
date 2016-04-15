@@ -1,0 +1,7 @@
+def Dulp(array):
+	hashtable = []
+	print hashtable[5]
+
+
+
+Dulp([1,2])

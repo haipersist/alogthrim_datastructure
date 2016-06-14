@@ -1,30 +1,37 @@
 '''
-merge sort use the diversive method,it nedd a temp array
+merge sort use the diversive method,it needs a temp array
+
 '''
 
+
 def merge(L1,L2):
-    sorted_array=[]
+    temp_array = []
     while L1 and L2:
-        if L1[0] <= L2[0]:
-            sorted_array.append(L1.pop(0))
+        if L1[0] > L2[0]:
+            temp_array.append(L2.pop(0))
         else:
-            sorted_array.append(L2.pop(0))          
-    if L1:
-        sorted_array.extend(L1)             
+            temp_array.append(L1.pop(0))
+
     if L2:
-        sorted_array.extend(L2)
-    return sorted_array
+        temp_array.extend(L2)
+    if L1:
+        temp_array.extend(L1)
 
-def mersort(array):
-    if len(array)<=1:
+    return temp_array
+
+def merge_sort(array):
+    length = len(array)
+    if length == 0 :
+        return None
+    elif length == 1:
         return array
-    center=len(array)//2
-    return merge(mersort(array[:center]),mersort(array[center:]))
+    center = length / 2
+    return merge(merge_sort(array[:center]),merge_sort(array[center:]))
+
+if __name__ == "__main__":
+    array = [35,767,24,67,243,88,579,243,1]
+    print merge_sort(array)
 
 
-if __name__=="__main__":
-    array=[8,20,15,4,6,3,7,2,1,9]
-    print mersort(array)
-    
 
             

@@ -105,6 +105,61 @@ Node *insert_node(Node *L,int index,int data)
 
 
 
+Node *Reverse(Node *L)
+{
+    Node *Pre = NULL;
+    Node *cur = L->next;
+    while(cur!=NULL)
+    {
+        Node *q = cur->next;
+        cur->next = Pre;
+        Pre = cur;
+        cur = q;
+    }
+    Node *ReverseHead = (Node*)malloc(sizeof(Node));
+    ReverseHead->next = Pre;
+    return ReverseHead;
+}
+
+
+Node *find_first_common_node(Node* L1,Node* L2)
+{
+    int L1Length = get_length(L1);
+    int L2Length = get_length(L2);
+    int length_diff = L1Length - L2Length;
+    Node *LinkLong = L1;
+    Node *LinkShort = L2;
+    if(length_diff<0)
+    {
+        length_diff=L2Length-L1Length;
+        LinkLong = L2;
+        LinkShort = L1;
+    }
+    for(int i=0;i<length_diff;i++)
+        LinkLong = LinkLong->next;
+    while(LinkLong!=NULL && LinkShort!=NULL && LinkLong->data!=LinkShort->data)
+    {
+        LinkLong = LinkLong->next;
+        LinkShort = LinkShort->next;
+    }
+    return LinkLong;
+}
+
+
+
+Node* find_reverse_k_node(Node* L,int k)
+{
+    Node *p = L;
+    Node *q = L;
+    for(int i=1;i<k;i++)
+        q = q->next;
+    while(q->next!=NULL)
+    {
+        p = p->next;
+        q = q->next;
+    }
+    return p;
+}
 
 
 
@@ -121,6 +176,8 @@ int main(void)
     printf("\n");
     Node *ins = insert_node(chain,3,100);
     print_chain(ins);
+    Node *reverse = Reverse(chain);
+    print_chain(reverse);
     return 0;
 }
 

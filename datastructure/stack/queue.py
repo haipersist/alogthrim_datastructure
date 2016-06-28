@@ -26,7 +26,7 @@ class Queue:
         return True if len(self.queue) else False
 
     @property
-    def length(self):
+    def size(self):
         return len(self.queue)
 
     def pop(self):
